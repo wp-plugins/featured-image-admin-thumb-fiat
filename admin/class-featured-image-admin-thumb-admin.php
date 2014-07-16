@@ -6,7 +6,7 @@
  * @author    Sean Hayes <sean@seanhayes.biz>
  * @license   GPL-2.0+
  * @link      http://www.seanhayes.biz
- * @copyright 2013 Sean Hayes
+ * @copyright 2014 Sean Hayes
  */
 
 /**
@@ -133,12 +133,11 @@ class Featured_Image_Admin_Thumb_Admin {
 	 */
 	public function enqueue_admin_styles() {
 
-		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
-			return;
-		}
-
 		$screen = get_current_screen();
-		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
+		$current_post_type = get_post_type();
+		// Add custom uploader css and js support for all post types.
+		if ( "edit-{$current_post_type}" == $screen->id  ) {
+			wp_enqueue_style( $this->plugin_slug .'-admin-styles-genericons', plugins_url( 'assets/css/genericons.css', __FILE__ ), array(), Featured_Image_Admin_Thumb::VERSION );
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Featured_Image_Admin_Thumb::VERSION );
 		}
 
@@ -153,20 +152,11 @@ class Featured_Image_Admin_Thumb_Admin {
 	 */
 	public function enqueue_admin_scripts() {
 
-        // Enable the next block if the settings page retures
+        // Enable the next block if the settings page returns
 		/*if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
 			return;
 		}*/
-
 		$screen = get_current_screen();
-		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_script(
-                $this->plugin_slug . '-admin-script',
-                plugins_url( 'assets/js/admin.js', __FILE__ ),
-                array( 'jquery' ),
-                Featured_Image_Admin_Thumb::VERSION );
-		}
-
         $current_post_type = get_post_type();
         // Add custom uploader css and js support for all post types.
         if ( "edit-{$current_post_type}" == $screen->id  ) {
@@ -305,7 +295,14 @@ class Featured_Image_Admin_Thumb_Admin {
                         $thumb_url = get_image_tag( $thumbnail_id, '', '', '', $fiat_image_size );
                     }
                     // Here it is!
-                    print_r($thumb_url);
+	                $this->fiat_nonce = wp_create_nonce( 'set_post_thumbnail-' . $post_id );
+	                $template_html = '<a title="Change featured image" href="%1$s" id="set-post-thumbnail" class="fiat_thickbox" >%2$s<span class="genericon genericon-edit fiat-icon"></span></a>';
+	                $html = sprintf( $template_html,
+		                home_url() . '/wp-admin/media-upload.php?post_id=' . $post_id .'&amp;type=image&amp;TB_iframe=1&_wpnonce=' . $this->fiat_nonce,
+		                $thumb_url
+	                );
+	                // Click me to change!
+	                echo $html;
                 } else {
 
                     // This nonce "action" parameter must match the Ajax Referrer action used in the js and PHP
@@ -329,7 +326,7 @@ class Featured_Image_Admin_Thumb_Admin {
      * @return array
      * @since 1.0.0
      *
-     * Add our custom column to all posts/pages view
+     * Add our custom column to all posts/pages/custom post types view
      *
      */
     public function fiat_add_thumb_column($columns) {
