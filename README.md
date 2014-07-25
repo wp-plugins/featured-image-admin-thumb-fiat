@@ -51,6 +51,9 @@ After checking that the plugin is enabled, be sure to click Screen Options if yo
 
 ###Changelog
 
+= 1.3.1 (2014-07-24) =
+Adding in missing Genericons.
+
 = 1.3 (2014-07-15) =
 Added highlighting on images in All Post/All Pages/All Custom Post Type screens - displaying an edit icon that when clicked can change the featured image inline without having to edit the relevant content item
 

@@ -4,7 +4,7 @@ Donate link: http://www.seanhayes.biz/
 Tags: thumbnail, admin, image, featured, featured image, featured thumbnail
 Requires at least: 3.5.1
 Tested up to: 4.0-alpha-29138-src
-Stable tag: 1.3
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,9 @@ After checking that the plugin is enabled, be sure to click Screen Options if yo
 3. Shows the change icon located next to a featured image/thumb indicating it can be changed inline without having to edit the content item first
 
 == Changelog ==
+
+= 1.3.1 (2014-07-24) =
+Adding in missing Genericons.
 
 = 1.3 (2014-07-15} =
 Added highlighting on images in All Post/All Pages/All Custom Post Type screens - displaying an edit indicator icon that when clicked can change the featured image inline without having to edit the relevant content item
