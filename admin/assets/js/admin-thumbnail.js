@@ -30,7 +30,7 @@
         if (typeof(thumbnail_upload_frame)!=="undefined") {
             thumbnail_upload_frame.close();
         }
-        // Set the title and expected images to use in the dialoa
+        // Set the title and expected images to use in the dialog
         thumbnail_upload_frame = wp.media.frames.customHeader = wp.media({
             //Title of media manager frame
             title: "Featured Image Admin Thumb",
@@ -41,8 +41,13 @@
                 //Button text
                 text: "Use as thumbnail"
             },
-            //Do not allow multiple files, if you want multiple, set true
-            multiple: false
+            states: [
+                new wp.media.controller.Library({
+                    library:   wp.media.query({ type: 'image' }),
+                    multiple:  false, // do not allow multiple files, if you want multiple, set true
+                    filterable: 'all' // turn on filters
+                })
+            ]
         });
         // Set the post id we would like the thumbnail assigned to
         wp.media.model.settings.post.id = post_id;
