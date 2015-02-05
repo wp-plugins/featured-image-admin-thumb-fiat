@@ -100,6 +100,7 @@ class Featured_Image_Admin_Thumb_Admin {
 
 		$excluded_post_types = array(
 			'nav_menu_item',
+			'revision',
 			'attachment',
 		);
 
@@ -327,10 +328,11 @@ class Featured_Image_Admin_Thumb_Admin {
                     }
                     // Here it is!
 	                $this->fiat_nonce = wp_create_nonce( 'set_post_thumbnail-' . $post_id );
-	                $template_html = '<a title="Change featured image" href="%1$s" id="set-post-thumbnail" class="fiat_thickbox" >%2$s<span class="genericon genericon-edit fiat-icon"></span></a>';
+	                $template_html = '<a title="Change featured image" href="%1$s" id="set-post-thumbnail" class="fiat_thickbox" data-thumbnail-id="%3$d">%2$s<span class="genericon genericon-edit fiat-icon"></span></a>';
 	                $html = sprintf( $template_html,
 		                home_url() . '/wp-admin/media-upload.php?post_id=' . $post_id .'&amp;type=image&amp;TB_iframe=1&_wpnonce=' . $this->fiat_nonce,
-		                $thumb_url
+		                $thumb_url,
+		                $thumbnail_id
 	                );
 	                // Click me to change!
 	                echo $html;
