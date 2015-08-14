@@ -1,10 +1,10 @@
 === Featured Image Admin Thumb ===
 Contributors: seanchayes
 Donate link: http://www.seanhayes.biz/
-Tags: thumbnail, admin, image, featured, featured image, featured thumbnail
+Tags: thumbnail, admin, image, featured, featured image, featured thumbnail, featured admin thumbnail
 Requires at least: 3.5.1
-Tested up to: 4.2
-Stable tag: 1.3.3
+Tested up to: 4.3
+Stable tag: 1.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,7 +45,7 @@ You can also change the thumb/image from the All Posts/All Pages/All Custom Post
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= You don't see the thumb column and the thumbnails in that column =
 
 After checking that the plugin is enabled, be sure to click Screen Options if you don't immediately see the column and ensure "Thumb" has a checkmark next to it
 
@@ -56,6 +56,10 @@ After checking that the plugin is enabled, be sure to click Screen Options if yo
 3. Shows the change icon located next to a featured image/thumb indicating it can be changed inline without having to edit the content item first
 
 == Changelog ==
+= 1.3.4 (2015-08-14) =
+Check if sizes is an array before looping over it as [reported here:](https://wordpress.org/support/topic/how-to-cure-sql-corruption) to prevent PHP error display
+Updated stable tag
+
 = 1.3.3 (2015-02-04) =
 Additional excluded post type
 Markup and JS to support showing the selected thumbnail in the media uploader
@@ -92,4 +96,3 @@ Added thumbnail size check to use default "thumbnail" if bundled "fiat_thumb" is
 == Upgrade Notice ==
 
 == Updates ==
-

@@ -309,15 +309,16 @@ class Featured_Image_Admin_Thumb_Admin {
                     $fiat_image_size = 'thumbnail';
 
                     // Review the sizes this particular image has been set to
+					if ( is_array( $sizes ) ) {
+						foreach ($sizes as $s => $k) {
+							if ( $this->fiat_image_size == $s ) {
 
-                    foreach ($sizes as $s => $k) {
-                        if ( $this->fiat_image_size == $s ) {
-
-                            // our size is present, set it and break out
-                            $fiat_image_size = $this->fiat_image_size;
-                            break;
-                        }
-                    }
+								// our size is present, set it and break out
+								$fiat_image_size = $this->fiat_image_size;
+								break;
+							}
+						}
+					}
 
                     if ( 'thumbnail' == $fiat_image_size ) {
                         // size down this time
